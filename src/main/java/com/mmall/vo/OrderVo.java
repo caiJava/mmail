@@ -42,9 +42,9 @@ public class OrderVo {
 
     private  Integer shippingId;
 
-    private String receiverName;
-
     private ShippingVo shippingVo;
+
+    private String receiverName;
 
     public Long getOrderNo() {
         return orderNo;

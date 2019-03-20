@@ -37,12 +37,24 @@ public class OrderController {
     @Autowired
     private IOrderService iOrderService;
 
+    public ServerResponse cancel(HttpSession session, Long orderId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),
+                    ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.cancel(user.getId(),orderId);
+    }
+
+    @RequestMapping(value = "create.do", method = RequestMethod.POST)
+    @ResponseBody
     public ServerResponse create(HttpSession session, Integer shippingId){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),
                     ResponseCode.NEED_LOGIN.getDesc());
         }
+        return iOrderService.createOrder(user.getId(),shippingId);
     }
 
     /**

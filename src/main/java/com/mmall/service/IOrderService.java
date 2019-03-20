@@ -1,6 +1,7 @@
 package com.mmall.service;
 
 import com.mmall.common.ServerResponse;
+import com.mmall.vo.OrderVo;
 
 import java.util.Map;
 
@@ -14,4 +15,8 @@ public interface IOrderService {
     ServerResponse alipayCallback(Map<String,String> param);
 
     ServerResponse queryOrderPayStatus(Integer userId, Long orderNo);
+
+    ServerResponse<OrderVo> createOrder(Integer userId, Integer shippingId);
+
+    ServerResponse cancel(Integer userId, Long orderId);
 }
